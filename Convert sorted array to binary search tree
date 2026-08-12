@@ -1,0 +1,17 @@
+class Solution {
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return buildTree(nums, 0, nums.length - 1);
+    }
+
+    private TreeNode buildTree(int[] nums, int start, int end) {
+        if (start > end) return null; // Base case: no elements left
+        
+        int mid = (start + end) / 2; // Find the middle element
+        TreeNode root = new TreeNode(nums[mid]); // Create the root node
+        
+        root.left = buildTree(nums, start, mid - 1); // Build the left side
+        root.right = buildTree(nums, mid + 1, end);  // Build the right side
+        
+        return root;
+    }
+}
