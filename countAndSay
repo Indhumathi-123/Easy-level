@@ -1,0 +1,36 @@
+class Solution {
+    public String countAndSay(int n) {
+        // Base case: n = 1 ah iruntha eppovume "1" thaan output
+        if (n == 1) {
+            return "1";
+        }
+        
+        // n = 1 oda result ah starting string ah vechikuvom
+        String res = "1";
+        
+        // Loop 2 la irunthu n varai run aagum
+        for (int i = 2; i <= n; i++) {
+            StringBuilder sb = new StringBuilder();
+            int count = 1;
+            
+            // Munnadi kedaicha string-ah loop panni RLE kandupudikom
+            for (int j = 1; j < res.length(); j++) {
+                // Adutha number-um ore matheri iruntha count-ah yethuvom
+                if (res.charAt(j) == res.charAt(j - 1)) {
+                    count++;
+                } else {
+                    // Vera number vantha, munnadi iruntha count matrum character-ah serpom
+                    sb.append(count).append(res.charAt(j - 1));
+                    count = 1; // Reset count for the new character
+                }
+            }
+            // Kadaisi group characters-ah append pannrom
+            sb.append(count).append(res.charAt(res.length() - 1));
+            
+            // Ippo kedaicha puthu string ah adutha round-uku res-ah mathikurom
+            res = sb.toString();
+        }
+        
+        return res;
+    }
+}
